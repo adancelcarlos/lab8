@@ -5,89 +5,111 @@
   <title>US Quiz (Express)</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <script>
-    $(document).ready(function(){
-      //Event Listeners
-      $(".q5choice").on("click", function(){
-      	$(".q5choice").css("background-color",""); //resets background color
-      	$(this).css("background-color","rgb(255, 255, 0)"); 
-      })
-      
-      
-      $("#submitBtn").on("click", function(){
-        $.ajax({
-  
-              method: "GET",
-              url: "/gradeQuiz",
-              dataType: "json",
-              data: { "q1": $("#q1").val() },
-              success: function(result,status) {
-                alert(result);
-              }
-        
-        });//ajax
-      });//submitBtn
-      
-      
-    })//ready
-  </script>
-
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+  <style>
+    label{
+      margin-right: 10px;
+    }
+  </style>
 </head>
-<body class="text-center">
-
-  <h1 class="jumbotron"> US Geography Quiz <br> Express Version </h1>
-  
-  <!--<form>-->
-  
-  <h3><span id="markImg1"></span> What is the capital of California?</h3>
-  <input type="text" id="q1" name="q1" value="">
-  <br><br>
-  <div id="q1Feedback"></div>
-  <br>
-
-  <h3><span id="markImg2"></span>What is the longest river?</h3>
+  <body class="text-center">
+    
+    <h1 class="jumbotron"> US Geography Quiz <br> Express Version </h1>
+    
+    <!--<form>-->
+    
+    <h3>
+      <span id="markQ1"></span> What is the capital of California?
+    </h3>
+    <input type="text" id="q1" name="q1" value="">
+    <br><br>
+    <div id="q1Feedback"></div>
+    <br>
+    
+    <h3>
+      <span id="markQ2"></span>What is the longest river?
+    </h3>
     <select id="q2" name="q2">
-        <option value="">Select One</option>
-        <option value="ms">Mississippi</option>
-        <option selected value="mo">Missouri</option>
-        <option value="co">Colorado</option>
-        <option value="de">Delaware</option>
+      <option value="">Select One</option>
+      <option value="ms">Mississippi</option>
+      <option selected value="mo">Missouri</option>
+      <option value="co">Colorado</option>
+      <option value="de">Delaware</option>
     </select>
     <br><br>
-  <div id="q2Feedback"></div>
-  <br>
-
-    <h3><span id="markImg3"></span>What presidents are carved into mount Rushmore?</h3>
-    <input type="checkbox" name="q3a" id="Jackson">   <label for="Jackson"> A. Jackson    </label> 
-    <input type="checkbox" name="q3b" id="Franklin">  <label for="Franklin">B. Franklin  </label>
-    <input type="checkbox" checked name="q3c" id="Jefferson"> <label for="Jefferson">T. Jefferson</label>
-    <input type="checkbox" name="q3d" id="Roosevelt"> <label for="Roosevelt">T. Roosevelt</label>
+    <div id="q2Feedback"></div>
+    <br>
+    
+    <h3>
+      <span id="markQ3"></span>What presidents are carved into mount Rushmore?
+    </h3>
+    <input type="checkbox" name="q3a" id="q3a"> <label for="q3a"> A. Jackson    </label> 
+    <input type="checkbox" name="q3b" id="q3b"> <label for="q3b">B. Franklin  </label>
+    <input type="checkbox" name="q3c" id="q3c"> <label for="q3c">T. Jefferson</label>
+    <input type="checkbox" name="q3d" id="q3d"> <label for="q3d">T. Roosevelt</label>
     <br><br>
     <div id="q3Feedback"></div>
     <br>
-
-	<h3><span id="markImg4"></span>What is the smallest US state?</h3>
-	<div id="choices"> </div>
+    
+    <h3>
+      <span id="markQ4"></span>What is the smallest US state?
+    </h3>
+    <div id="choices"> 
+    </div>
     <br><br>
     <div id="q4Feedback"></div>
     <br>
     
-    <h3><span id="markImg5"></span>Which is the correct seal of California?</h3>
+    <h3>
+      <span id="markQ5"></span>Which is the correct seal of California?
+    </h3>
     <img src="/img/seal1.png" alt= "seal1" class="q5choice" id="seal1">
     <img src="/img/seal2.png" alt= "seal2" class="q5choice" id="seal2">
     <img src="/img/seal3.png" alt= "seal3" class="q5choice" id="seal3">
-	
-	<br><br>
+    
+    <input type="hidden" id="q5" value="" />
+    
+    <br><br>
     <div id="q5Feedback"></div>
     <br>
-
+    
+    <h3>
+      <span id="markQ6"></span> How many states are there?
+    </h3>
+    <input id="q6" type="number" name="states"/>
+    <br><br>
+    <div id="q6Feedback"></div>
+    <br>
+    
+    <h3>
+      <span id="markQ7"></span> What is the US currency?
+    </h3>
+    <input type="radio" name="q7" id="US" value="US"> <label for="US">Dollars</label>
+    <input type="radio" name="q7" id="EU" value="Euro"> <label for="EU">Yen</label></label>
+    <input type="radio" name="q7" id="ESP" value="Pesos"> <label for="ESP">Pesos</label>
+    <input type="radio" name="q7" id="UK" value="Pounds"> <label for="UK">Rupees</label>
+    <br><br>
+    <div id="q7Feedback"></div>
+    <br>
+    
+    <h3>
+      <span id="markQ8"></span> What is the capital of Texas?
+    </h3>
+    <input type="text" id="q8" value="" placeholder="">
+    <br><br>
+    <div id="q8Feedback"></div>
+    <br>
+    
+    
     <button id="submitBtn" class="btn btn-outline-success"> Submit Quiz </button>
     <br><br>
-
+    
+  	<h2 id="celebrate"></h2>
     <h2 id="totalScore" class="text-info">Total Score:  </h2>
-   
-   <!--</form>-->
-   
-</body>
+    <h3 id="attempts" ></h3>
+    
+    <!--</form>-->
+    
+    <script src="/scripts.js"></script>
+  </body>
 </html>
