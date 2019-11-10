@@ -53,8 +53,29 @@ app.get("/gradeQuiz", function(req,res){
    if (req.query.q5 == "seal2") {
         score += 20;
         f5 = "Right!";
-    }    
-    res.send( {"score": score, "feedback":[{"fback":f1}, {"fback":f2}, {"fback":f3}, {"fback":f4}, {"fback":f5}]});
+    } 
+    if (req.query.q6 == 50) {
+        score += 12.5;
+        f6 = "Right!";
+    }
+   if (req.query.q7 == "Dollars") {
+        score += 12.5;
+        f7 = "Right!";
+    }
+   if (req.query.q8 == "Austin") {
+        score += 12.5;
+        f8 = "Right!";
+    }
+    
+    
+    
+    res.send( {
+        "score": score,"fback1":f1,"fback2":f2,"fback3":f3,"fback4":f4,"fback5":f5,"fback6":f6,"fback7":f7,"fback8":f8
+    });
+    
+    
+    
+    //res.send( {"score": score, "feedback":[{"fback":f1}, {"fback":f2}, {"fback":f3}, {"fback":f4}, {"fback":f5}]});
     
     
 });
