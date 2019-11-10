@@ -7,31 +7,16 @@ app.use(express.static("public")); //access images, css, js
 //routes
 app.get("/", function(req, res){
     
-    //console.log(req.query.q1);
-    // let score = 0;
-    // let f1, f2, f3, f4, f5;
-    // f1 = f2 = f3 = f4 = f5 = "Wrong!";
-    
-    // if (req.query.q1.toLowerCase() == "sacramento") {
-    //     score += 20;
-    //     f1 = "You got it!";
-    // }
-    //res.render("index", {"score": score, "feedback1":f1});
-    
-    //TODO: shuffle the array
-    let q3Choices = ["Maine", "Nevada", "Rhode Island", "Florida"];
-    
-    res.render("index", {"q3Choices":q3Choices});
+    res.render("index.ejs");
     
 } );
 
 
 app.get("/gradeQuiz", function(req,res){
     
-    //console.log(req.query.q1);
     let score = 0;
-    let f1, f2, f3, f4, f5;
-    f1 = f2 = f3 = f4 = f5 = "Wrong!";
+    let f1, f2, f3, f4, f5, f6, f7, f8;
+    f1 = f2 = f3 = f4 = f5 = f6 = f7 = f8 = "Wrong!";
     
     if (req.query.q1.toLowerCase() == "sacramento") {
         score += 20;
@@ -68,15 +53,19 @@ app.get("/gradeQuiz", function(req,res){
     }
     
     
-    
     res.send( {
-        "score": score,"fback1":f1,"fback2":f2,"fback3":f3,"fback4":f4,"fback5":f5,"fback6":f6,"fback7":f7,"fback8":f8
+        "score": score,
+        "fback1":f1,
+        "fback2":f2,
+        "fback3":f3,
+        "fback4":f4,
+        "fback5":f5,
+        "fback6":f6,
+        "fback7":f7,
+        "fback8":f8
     });
     
-    
-    
-    //res.send( {"score": score, "feedback":[{"fback":f1}, {"fback":f2}, {"fback":f3}, {"fback":f4}, {"fback":f5}]});
-    
+        
     
 });
 
